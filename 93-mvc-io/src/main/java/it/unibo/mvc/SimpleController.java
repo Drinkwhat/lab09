@@ -23,10 +23,14 @@ public final class SimpleController implements Controller {
         if (string == null) {
             throw new IllegalArgumentException("string cannot be null");
         }
+
         if (string.isBlank()) {
             throw new IllegalArgumentException("string cannot be blank");
         }
-        list.add(string);
+
+        if (list.add(string)) {
+            currentIndex++;
+        }
     }
 
     @Override
@@ -34,7 +38,8 @@ public final class SimpleController implements Controller {
         if (currentIndex + 1 >= list.size()) {
             throw new IllegalStateException("no next string");
         }
-        return list.get(++currentIndex);
+        currentIndex++;
+        return list.get(currentIndex);
     }
 
     @Override
@@ -51,5 +56,12 @@ public final class SimpleController implements Controller {
             throw new IllegalStateException("no current string");
         }
         return list.get(currentIndex);
+    }
+
+    /**
+     * 
+     */
+    public void printCurrentString() {
+        System.out.println(getCurrentString()); // NOPMD
     }
 }
