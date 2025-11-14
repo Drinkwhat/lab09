@@ -50,18 +50,18 @@ public final class SimpleGUIWithFileChooser {
                         controller.setFile(fileChooser.getSelectedFile());
                         textField.setText(controller.getPath());
                     }
-                    case JFileChooser.CANCEL_OPTION -> System.out.println("operazione annulata");
+                    case JFileChooser.CANCEL_OPTION -> System.out.println("operazione annulata"); // NOPMD
                     default -> JOptionPane.showMessageDialog(
                             frame,
                             "An error has occurred.",
                             "Error",
-                            javax.swing.JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
         saveButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.write(textArea.getText());
             }
         });
@@ -87,6 +87,9 @@ public final class SimpleGUIWithFileChooser {
         frame.setVisible(true);
     }
 
+    /**
+     * @param args gli argomenti passati non servono a nulla
+     */
     public static void main(final String... args) {
         new SimpleGUIWithFileChooser().display();
     }

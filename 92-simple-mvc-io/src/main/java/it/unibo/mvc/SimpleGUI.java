@@ -39,7 +39,7 @@ public final class SimpleGUI {
          */
         saveButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.write(textArea.getText());
             }
         });
@@ -54,6 +54,9 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
+    /**
+     *  @param args gli argomenti passati non servono a nulla
+     */
     public static void main(final String... args) {
         new SimpleGUI().display();
     }
