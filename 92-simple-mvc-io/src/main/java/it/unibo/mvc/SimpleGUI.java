@@ -3,8 +3,6 @@ package it.unibo.mvc;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,24 +23,24 @@ public final class SimpleGUI {
      * Constructs a GUI with a text area for writing text to a file.
      */
     public SimpleGUI() {
+        // Creazione componenti
         final JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
         final JTextArea textArea = new JTextArea();
-        panel.add(textArea);
         final JButton saveButton = new JButton("Save");
+
+        // Layout
+        panel.setLayout(new BorderLayout());
+
+        // Composizione GUI
+        panel.add(textArea, BorderLayout.CENTER);
         panel.add(saveButton, BorderLayout.SOUTH);
+
+        // Frame
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /*
-         * Handlers
-         */
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                controller.write(textArea.getText());
-            }
-        });
+        // Handlers
+        saveButton.addActionListener(e -> controller.write(textArea.getText()));
     }
 
     private void display() {

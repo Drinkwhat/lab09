@@ -3,8 +3,6 @@ package it.unibo.mvc;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -40,31 +38,23 @@ public final class SimpleGUIWithFileChooser {
         // Configurazione componenti
         textField.setEditable(false);
         textField.setText(controller.getPath());
-        browseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                final JFileChooser fileChooser = new JFileChooser();
-                final int result = fileChooser.showSaveDialog(frame);
-                switch (result) {
-                    case JFileChooser.APPROVE_OPTION -> {
-                        controller.setFile(fileChooser.getSelectedFile());
-                        textField.setText(controller.getPath());
-                    }
-                    case JFileChooser.CANCEL_OPTION -> System.out.println("operazione annulata"); // NOPMD
-                    default -> JOptionPane.showMessageDialog(
-                            frame,
-                            "An error has occurred.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
+        browseButton.addActionListener(e -> {
+            final JFileChooser fileChooser = new JFileChooser();
+            final int result = fileChooser.showSaveDialog(frame);
+            switch (result) {
+                case JFileChooser.APPROVE_OPTION -> {
+                    controller.setFile(fileChooser.getSelectedFile());
+                    textField.setText(controller.getPath());
                 }
+                case JFileChooser.CANCEL_OPTION -> System.out.println("operazione annulata"); // NOPMD
+                default -> JOptionPane.showMessageDialog(
+                        frame,
+                        "An error has occurred.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                controller.write(textArea.getText());
-            }
-        });
+        saveButton.addActionListener(e -> controller.write(textArea.getText()));
 
         // Composizione della GUI
         topPanel.add(textField);
