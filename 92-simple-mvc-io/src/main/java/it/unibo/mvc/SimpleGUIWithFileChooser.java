@@ -44,7 +44,7 @@ public final class SimpleGUIWithFileChooser {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 final JFileChooser fileChooser = new JFileChooser();
-                final int result = fileChooser.showSaveDialog(null);
+                final int result = fileChooser.showSaveDialog(frame);
                 switch (result) {
                     case JFileChooser.APPROVE_OPTION -> {
                         controller.setFile(fileChooser.getSelectedFile());
