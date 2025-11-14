@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -29,6 +30,7 @@ public final class SimpleGUIWithFileChooser {
         final JPanel topPanel = new JPanel();
         final JTextField textField = new JTextField();
         final JButton browseButton = new JButton("Browse...");
+        final JTextArea textArea = new JTextArea();
         final JButton saveButton = new JButton("Save");
 
         // Configurazione layout
@@ -50,12 +52,17 @@ public final class SimpleGUIWithFileChooser {
                     }
                     case JFileChooser.CANCEL_OPTION -> System.out.println("operazione annulata");
                     default -> JOptionPane.showMessageDialog(
-                                frame,
-                                "An error has occurred.",
-                                "Error",
-                                javax.swing.JOptionPane.ERROR_MESSAGE
-                            );
+                            frame,
+                            "An error has occurred.",
+                            "Error",
+                            javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.write(textArea.getText());
             }
         });
 
@@ -63,6 +70,7 @@ public final class SimpleGUIWithFileChooser {
         topPanel.add(textField);
         topPanel.add(browseButton);
         panel.add(topPanel, BorderLayout.NORTH);
+        panel.add(textArea, BorderLayout.CENTER);
         panel.add(saveButton, BorderLayout.SOUTH);
 
         // Configurazione del frame
