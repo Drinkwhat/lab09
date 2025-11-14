@@ -29,18 +29,17 @@ import java.util.Random;
 public class BadIOGUI {
 
     private static final String TITLE = "A very simple GUI application";
-    private static final String PATH = System.getProperty("user.home")
-            + File.separator
-            + BadIOGUI.class.getSimpleName() + ".txt";
-    private static final Path PATH2 = Paths.get(PATH);
-    // private static final int PROPORTION = 5;
-    private final Random randomGenerator = new Random();
     private final JFrame frame = new JFrame(TITLE);
 
     /**
      * Creates a new BadIOGUI.
      */
     public BadIOGUI() {
+        final String path = System.getProperty("user.home")
+                + File.separator
+                + BadIOGUI.class.getSimpleName() + ".txt";
+        final Path path2 = Paths.get(path);
+        final Random randomGenerator = new Random();
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Write on file");
@@ -65,7 +64,7 @@ public class BadIOGUI {
                  * operation. I/O operations may take a long time, during which
                  * your UI becomes completely unresponsive.
                  */
-                try (PrintStream ps = new PrintStream(PATH, StandardCharsets.UTF_8)) {
+                try (PrintStream ps = new PrintStream(path, StandardCharsets.UTF_8)) {
                     ps.print(randomGenerator.nextInt());
                 } catch (final IOException e) {
                     JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -77,7 +76,7 @@ public class BadIOGUI {
             @Override
             public void actionPerformed(final ActionEvent event) {
                 try {
-                    final List<String> content = Files.readAllLines(PATH2);
+                    final List<String> content = Files.readAllLines(path2);
                     System.err.println(content.toString()); // NOPMD
                 } catch (final IOException e) {
                     System.err.println(e); // NOPMD
@@ -120,6 +119,6 @@ public class BadIOGUI {
      * @param args ignored
      */
     public static void main(final String... args) {
-       new BadIOGUI().display();
+        new BadIOGUI().display();
     }
 }
