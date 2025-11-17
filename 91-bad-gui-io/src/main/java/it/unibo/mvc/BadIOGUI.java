@@ -1,10 +1,5 @@
 package it.unibo.mvc;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +10,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * This class is a simple application that writes a random number on a file.
@@ -33,25 +34,31 @@ public class BadIOGUI {
      * Creates a new BadIOGUI.
      */
     public BadIOGUI() {
+        // Creazione componenti
         final String path = System.getProperty("user.home")
                 + File.separator
                 + BadIOGUI.class.getSimpleName() + ".txt";
         final Path path2 = Paths.get(path);
         final Random randomGenerator = new Random();
         final JPanel canvas = new JPanel();
-        canvas.setLayout(new BorderLayout());
+        final JPanel horizontalPanel = new JPanel();
         final JButton write = new JButton("Write on file");
+        final JButton read = new JButton("Read");
+
+        // Layout
+        canvas.setLayout(new BorderLayout());
+        horizontalPanel.setLayout(new BoxLayout(horizontalPanel, BoxLayout.X_AXIS));
+
+        // Composizione GUI
+        horizontalPanel.add(write);
+        horizontalPanel.add(read);
+        canvas.add(horizontalPanel, BorderLayout.CENTER);
+
+        // Frame
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final JPanel horizontalPanel = new JPanel();
-        horizontalPanel.setLayout(new BoxLayout(horizontalPanel, BoxLayout.X_AXIS));
-        canvas.add(horizontalPanel, BorderLayout.CENTER);
-        horizontalPanel.add(write);
-        final JButton read = new JButton("Read");
-        horizontalPanel.add(read);
-        /*
-         * Handlers
-         */
+
+        // Handlers
         write.addActionListener(e -> {
             /*
              * This would be VERY BAD in a real application.
@@ -73,7 +80,6 @@ public class BadIOGUI {
                 System.err.println(content.toString()); // NOPMD
             } catch (final IOException err) {
                 System.err.println(err); // NOPMD
-
             }
         });
     }
