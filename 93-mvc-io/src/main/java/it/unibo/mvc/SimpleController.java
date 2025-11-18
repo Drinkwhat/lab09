@@ -5,19 +5,32 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 
+ * Controller semplice che mantiene una storia di stringhe inserite e permette
+ * di navigare tra di esse.
  *
+ * <p>
+ * Le stringhe vengono aggiunte in coda alla lista storica; il controller tiene
+ * traccia dell'indice corrente nella storia. Fornisce operazioni per aggiungere
+ * una nuova stringa, ottenere la stringa successiva, ottenere la stringa
+ * corrente e recuperare la storia fino all'elemento corrente.
+ * </p>
  */
 public final class SimpleController implements Controller {
 
     private final List<String> list;
     private int currentIndex;
 
+    /**
+     * Costruisce un nuovo SimpleController vuoto.
+     */
     SimpleController() {
         this.list = new ArrayList<>();
         this.currentIndex = -1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setNextString(final String string) {
         if (string == null) {
@@ -33,6 +46,9 @@ public final class SimpleController implements Controller {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getNextString() {
         if (currentIndex + 1 >= list.size()) {
@@ -42,6 +58,9 @@ public final class SimpleController implements Controller {
         return list.get(currentIndex);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getHistory() {
         if (currentIndex < 0) {
@@ -50,6 +69,9 @@ public final class SimpleController implements Controller {
         return new ArrayList<>(list.subList(0, currentIndex + 1));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCurrentString() {
         if (currentIndex < 0 || currentIndex >= list.size()) {
@@ -59,7 +81,9 @@ public final class SimpleController implements Controller {
     }
 
     /**
-     * 
+     * Stampa la stringa corrente su System.out. Utile per debugging / esercizi.
+     *
+     * @throws IllegalStateException se non esiste una stringa corrente
      */
     public void printCurrentString() {
         System.out.println(getCurrentString()); // : allowed as this is just an exercise
