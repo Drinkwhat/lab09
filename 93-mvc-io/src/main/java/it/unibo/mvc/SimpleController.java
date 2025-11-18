@@ -66,7 +66,8 @@ public final class SimpleController implements Controller {
         if (currentIndex < 0) {
             return Collections.emptyList();
         }
-        return new ArrayList<>(list.subList(0, currentIndex + 1));
+        // restituisco una copia immutabile della sottolista
+        return Collections.unmodifiableList(list.subList(0, currentIndex + 1));
     }
 
     /**
