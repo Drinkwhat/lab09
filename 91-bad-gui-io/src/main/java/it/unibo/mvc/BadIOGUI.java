@@ -77,9 +77,9 @@ public class BadIOGUI {
         read.addActionListener(e -> {
             try {
                 final List<String> content = Files.readAllLines(path2);
-                System.err.println(content.toString()); // NOPMD
+                System.err.println(content.toString()); // NOPMD: allowed as this is just an exercise
             } catch (final IOException err) {
-                System.err.println(err); // NOPMD
+                System.err.println(err); // NOPMD: allowed as this is just an exercise
             }
         });
     }

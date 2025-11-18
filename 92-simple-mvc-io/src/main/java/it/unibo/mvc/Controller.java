@@ -33,7 +33,7 @@ class Controller {
         try {
             Files.writeString(file.toPath(), text);
         } catch (final IOException e) {
-            e.printStackTrace(); // NOPMD
+            e.printStackTrace(); // NOPMD: allowed as this is just an exercise
         }
     } 
 }

@@ -62,6 +62,6 @@ public final class SimpleController implements Controller {
      * 
      */
     public void printCurrentString() {
-        System.out.println(getCurrentString()); // NOPMD
+        System.out.println(getCurrentString()); // : allowed as this is just an exercise
     }
 }
