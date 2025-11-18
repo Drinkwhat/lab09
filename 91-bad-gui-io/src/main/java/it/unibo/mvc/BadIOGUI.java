@@ -59,29 +59,33 @@ public class BadIOGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Handlers
-        write.addActionListener(e -> {
-            /*
-             * This would be VERY BAD in a real application.
-             *
-             * This makes the Event Dispatch Thread (EDT) work on an I/O
-             * operation. I/O operations may take a long time, during which
-             * your UI becomes completely unresponsive.
-             */
-            try (PrintStream ps = new PrintStream(path, StandardCharsets.UTF_8)) {
-                ps.print(randomGenerator.nextInt());
-            } catch (final IOException err) {
-                JOptionPane.showMessageDialog(frame, err, "Error", JOptionPane.ERROR_MESSAGE);
-                err.printStackTrace(); // NOPMD: allowed as this is just an exercise
+        write.addActionListener(
+            e -> {
+                /*
+                * This would be VERY BAD in a real application.
+                *
+                * This makes the Event Dispatch Thread (EDT) work on an I/O
+                * operation. I/O operations may take a long time, during which
+                * your UI becomes completely unresponsive.
+                */
+                try (PrintStream ps = new PrintStream(path, StandardCharsets.UTF_8)) {
+                    ps.print(randomGenerator.nextInt());
+                } catch (final IOException err) {
+                    JOptionPane.showMessageDialog(frame, err, "Error", JOptionPane.ERROR_MESSAGE);
+                    err.printStackTrace(); // NOPMD: allowed as this is just an exercise
+                }
             }
-        });
-        read.addActionListener(e -> {
-            try {
-                final List<String> content = Files.readAllLines(path2);
-                System.err.println(content.toString()); // NOPMD: allowed as this is just an exercise
-            } catch (final IOException err) {
-                System.err.println(err); // NOPMD: allowed as this is just an exercise
+        );
+        read.addActionListener(
+            e -> {
+                try {
+                    final List<String> content = Files.readAllLines(path2);
+                    System.out.println(content.getFirst()); // NOPMD: allowed as this is just an exercise
+                } catch (final IOException err) {
+                    System.err.println(err); // NOPMD: allowed as this is just an exercise
+                }
             }
-        });
+        );
     }
 
     private void display() {
