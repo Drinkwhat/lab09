@@ -26,6 +26,7 @@ public final class SimpleGUI {
      */
     public SimpleGUI() {
         // Creazione componenti
+        final JPanel topPanel = new JPanel();
         final JPanel panel = new JPanel();
         final JPanel bottomPanel = new JPanel();
         final JTextField textField = new JTextField();
@@ -34,14 +35,16 @@ public final class SimpleGUI {
         final JButton showHistoryButton = new JButton("Show history");
 
         // Layout
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
         panel.setLayout(new BorderLayout());
-        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+        bottomPanel.setLayout(new BorderLayout());
 
         // Composizione GUI
-        panel.add(textField, BorderLayout.NORTH);
+        panel.add(topPanel, BorderLayout.NORTH);
         panel.add(textArea, BorderLayout.CENTER);
         panel.add(bottomPanel, BorderLayout.SOUTH);
-        bottomPanel.add(printButton);
+        topPanel.add(textField);
+        topPanel.add(printButton);
         bottomPanel.add(showHistoryButton);
 
         // Frame

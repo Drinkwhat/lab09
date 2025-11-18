@@ -86,6 +86,6 @@ public final class SimpleController implements Controller {
      * @throws IllegalStateException se non esiste una stringa corrente
      */
     public void printCurrentString() {
-        System.out.println(getCurrentString()); // : allowed as this is just an exercise
+        System.out.println(getCurrentString()); // NOPMD: allowed as this is just an exercise
     }
 }

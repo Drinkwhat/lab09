@@ -46,7 +46,8 @@ public final class SimpleGUIWithFileChooser {
                     controller.setFile(fileChooser.getSelectedFile());
                     textField.setText(controller.getPath());
                 }
-                case JFileChooser.CANCEL_OPTION -> System.out.println("operazione annulata"); // NOPMD: allowed as this is just an exercise
+                //  allowed as this is just an exercise
+                case JFileChooser.CANCEL_OPTION -> System.out.println("operazione annulata"); // NOPMD
                 default -> JOptionPane.showMessageDialog(
                         frame,
                         "An error has occurred.",
